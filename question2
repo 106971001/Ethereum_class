@@ -1,0 +1,28 @@
+#!/usr/bin/env python3
+# sudo python3.7 -m pip install ecdsa, python-dev, pysha3, pypandoc, eth-keyfile
+ 
+from ecdsa import SigningKey, SECP256k1
+from eth_keyfile import create_keyfile_json
+import sha3,json
+ 
+# Create a keypair of private/public key
+priv = SigningKey.generate(curve=SECP256k1)
+ 
+# public_key = ECDSA(private_key)
+pub = priv.get_verifying_key().to_string()
+ 
+# public_key_hash = Keccak-256(public_key)
+keccak = sha3.keccak_256()
+keccak.update(pub)
+ 
+# address = '0x' + last 20 bytes of public_key_hash
+address = '0x' + keccak.hexdigest()[24:]
+ 
+print("Private key:\n", priv.to_string().hex())
+print("Public key: \n", pub.hex())
+print("Address:	\n", address)
+
+# generate a Keystore with the password “nccu”
+keystore = create_keyfile_json(priv.to_string(), str.encode('nccu'))
+print("Keystore file: ")
+print(json.dumps(keystore,indent=4))
