@@ -12,7 +12,8 @@ web3.eth.getAccounts().then(function (accounts) {
 
     // accounts[0] mint 3 * 10**18 coins
     // your code
-    bank.methods.mint(3 * 10**18 ).send({
+    let value = 3 * 10**18;
+    bank.methods.mint(value).send({
         from: accounts[0]
     })
     .on('receipt', console.log)
