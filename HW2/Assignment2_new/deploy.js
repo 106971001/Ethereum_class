@@ -10,9 +10,20 @@ let bank = new web3.eth.Contract(abi)
 
 web3.eth.getAccounts().then(function (accounts) {
 
-    console.log(accounts[1]);
     // deploy contract
     // your code
+    bank.deploy({
+        data: bytecode
+    })
+    .send({
+        from: accounts[0],
+        gas: 1500000,
+        gasPrice: '30000000000000'
+    })
+    .then(function(newContractInstance){
+        console.log(newContractInstance.options.address) // instance with the new contract address
+        fs.writeFileSync('./address.txt', newContractInstance.options.address)
+    });    
 
 
 })
