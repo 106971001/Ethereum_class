@@ -10,7 +10,11 @@ let bank = new web3.eth.Contract(abi, address)
 
 web3.eth.getAccounts().then(function (accounts) {
 
-    // get coin balance
+    // get account[0] coin balance
     // your code
+    bank.methods.getCoinBalance().call({
+        from: accounts[0]
+    })
+    .then((getCoinBalance) => {console.log(getCoinBalance)});
 
 })
