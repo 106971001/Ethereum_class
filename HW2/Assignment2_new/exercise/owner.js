@@ -12,9 +12,10 @@ web3.eth.getAccounts().then(function (accounts) {
 
     // get contract owner
     // your code
-    bank.getOwner.call({
+    bank.methods.getOwner().call({
         from: accounts[1]
     })
     .on('receipt', console.log)
+    .on('error', console.error)
 
 })
