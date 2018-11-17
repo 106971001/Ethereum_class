@@ -164,4 +164,5 @@ contract Bank {
     function kill() public isOwner {
         selfdestruct(owner);
     }
+
 }
