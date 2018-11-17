@@ -7,7 +7,7 @@ contract Bank {
 	// 儲存所有會員的ether餘額
     mapping (address => uint256) private balance;
 
-	// 儲存所有會員的coin餘額
+	// 儲存所有會員的coin餘額     // coin = ether
     mapping (address => uint256) private coinBalance;
 
 	// 事件們，用於通知前端 web3.js
@@ -72,40 +72,44 @@ contract Bank {
 
         // 增加 msg.sender 的 coinBalance
         // your code
+        coinBalance[msg.sender] += value;
 
         // emit MintEvent
         // your code
-
+        emit MintEvent(msg.sender,  value, now);
     }
 
-	// 使用 bank 中的 ether 向 owner 購買 coin
+	// 使用 bank 中的 ether 向 owner 購買 coin  
     function buy(uint256 coinValue) public {
         uint256 value = coinValue * 1 ether;
 
         // require owner 的 coinBalance 不小於 value
         // your code
+        require(coinBalance[owner] >= value, "owner coinbalances are not enough");
 
         // require msg.sender 的 etherBalance 不小於 value
         // your code
-        
+        require(balance[msg.sender] >= value, "your balances are not enough");
 
         // msg.sender 的 etherBalance 減少 value
         // your code
-        
+        balance[msg.sender] -= value;
+
         // owner 的 etherBalance 增加 value
         // your code
-        
+        balance[owner] += value;
 
         // msg.sender 的 coinBalance 增加 value
         // your code
-        
+        coinBalance[msg.sender] += value;
+
         // owner 的 coinBalance 減少 value
         // your code
-        
+        coinBalance[owner] -= value;
 
         // emit BuyCoinEvent
         // your code
-
+        emit BuyCoinEvent(msg.sender, value, now);
     }
 
 	// 轉移 coin
@@ -114,16 +118,19 @@ contract Bank {
 
         // require msg.sender 的 coinBalance 不小於 value
         // your code
+        require(coinBalance[msg.sender] >= value, "your coinbalances are not enough");
         
         // msg.sender 的 coinBalance 減少 value
         // your code
-        
+        coinBalance[msg.sender] -= value;
+
         // to 的 coinBalance 增加 value
         // your code
+        coinBalance[to] += value;
 
         // emit TransferCoinEvent
         // your code
-
+        emit TransferCoinEvent(msg.sender, to, value, now);
     }
 
 	// 檢查銀行帳戶餘額
@@ -146,10 +153,12 @@ contract Bank {
 
         // transfer ownership
         // your code
+        owner = newOwner;
         
         // emit TransferOwnerEvent
         // your code
-        
+        emit TransferOwnerEvent(msg.sender, newOwner, now);
+
     }
 
     function kill() public isOwner {
