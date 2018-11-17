@@ -18,7 +18,7 @@ contract Bank {
     event MintEvent(address indexed from, uint256 value, uint256 timestamp);
     event BuyCoinEvent(address indexed from, uint256 value, uint256 timestamp);
     event TransferCoinEvent(address indexed from, address indexed to, uint256 value, uint256 timestamp);
-    event TransferOwnerEvent(address indexed oldOwner, address indexed newOwner, uint256 timestamp)
+    event TransferOwnerEvent(address indexed oldOwner, address indexed newOwner, uint256 timestamp);
 
     modifier isOwner() {
         require(owner == msg.sender, "you are not owner");
