@@ -12,5 +12,7 @@ web3.eth.getAccounts().then(function (accounts) {
 
     // get contract owner
     // your code
+    var getowner = bank.getOwner.call();
+    console.log(getowner);
 
 })
