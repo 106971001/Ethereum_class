@@ -10,7 +10,7 @@ let bank = new web3.eth.Contract(abi)
 
 web3.eth.getAccounts().then(function (accounts) {
 
-    console.log(accounts);
+    console.log(accounts[1]);
     // deploy contract
     // your code
 
