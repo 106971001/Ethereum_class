@@ -13,7 +13,8 @@ web3.eth.getAccounts().then(function (accounts) {
     // get account[0] coin balance
     // your code
     bank.methods.getCoinBalance().call({
-        from: accounts[0]
+        from: accounts[0],
+        gas: 3400000
     })
     .then((getCoinBalance) => {console.log(getCoinBalance)});
 
