@@ -17,5 +17,6 @@ web3.eth.getAccounts().then(function (accounts) {
     })
     .on('receipt', console.log)
     .on('error', console.error)
+    .then((getowner) => {console.log(getowner)});
 
 })
