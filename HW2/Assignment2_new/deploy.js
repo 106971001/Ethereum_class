@@ -20,8 +20,8 @@ web3.eth.getAccounts().then(function (accounts) {
         gas: 1500000,
         gasPrice: '30000000000000'
     })
+    .on('receipt', console.log)
     .then(function(newContractInstance){
-        console.log(newContractInstance) // instance with the new contract address
         fs.writeFileSync('./address.txt', newContractInstance.options.address)
     });    
 
