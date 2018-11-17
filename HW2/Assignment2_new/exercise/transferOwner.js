@@ -12,7 +12,7 @@ web3.eth.getAccounts().then(function (accounts) {
 
     // accounts[0] transferOwner to accounts[1]
     // your code
-    bank.methods.transferCoin(accounts[1]).send({
+    bank.methods.transferOwner(accounts[1]).send({
         from: accounts[0]
     })
     .on('receipt', console.log)
