@@ -10,9 +10,8 @@ let bank = new web3.eth.Contract(abi, address)
 
 web3.eth.getAccounts().then(function (accounts) {
 
-    // accounts[0] mint 3 * 10**18 coins
+    // accounts[0] mint 3 * 10**18 coins  = 3 * 1 ether
     // your code
-    let value = 3 * 10**18;
     bank.methods.mint(3).send({
         from: accounts[0]
     })
